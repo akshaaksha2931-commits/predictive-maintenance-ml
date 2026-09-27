@@ -1,824 +1,307 @@
-\# Predictive Maintenance ML — Machine Failure Prediction
+# ⚙️ Predictive Maintenance - Machine Failure Prediction
 
+## 📌 Project Overview
 
+Predictive Maintenance is a machine learning project that predicts the probability of machine failure using sensor-based machine parameters.
 
-A machine learning system for \*\*early detection of industrial machine failure risk using sensor data\*\*.
+The system uses a **Random Forest Classifier** trained on historical machine sensor data and provides predictions through an interactive **Streamlit web application**.
 
+The goal is to help identify machines that may be at higher risk of failure so that preventive maintenance can be considered before unexpected breakdowns.
 
+---
 
-The project uses a Random Forest classifier to analyze machine operating conditions such as temperature, rotational speed, torque, and tool wear. It includes exploratory data analysis, model evaluation, probability-threshold optimization, and a command-line prediction system.
+## 🎯 Problem Statement
 
+Unexpected machine failures can result in:
 
+- Production downtime
+- Increased maintenance costs
+- Equipment damage
+- Reduced operational efficiency
 
-\---
+This project applies machine learning to historical machine sensor data to identify patterns associated with machine failures.
 
+---
 
+## 🚀 Features
 
-\## 🚀 Project Overview
+- Machine failure prediction using Random Forest
+- Failure probability estimation
+- Optimized decision threshold
+- Interactive Streamlit dashboard
+- Sensor parameter input
+- Machine risk classification
+- Maintenance recommendations
+- Feature importance visualization
+- Model performance evaluation
 
+---
 
+## 🧠 Machine Learning Model
 
-Unexpected equipment failure can result in production downtime, maintenance costs, and operational losses.
+### Algorithm
 
+**Random Forest Classifier**
 
+Random Forest was selected because it can handle nonlinear relationships between sensor parameters and machine failure while also providing feature importance information.
 
-This project explores a \*\*predictive maintenance approach\*\* where machine sensor measurements are used to estimate the probability of failure before it occurs.
-
-
-
-\### System Workflow
-
-
+### Model Configuration
 
 ```text
-
-Machine Sensor Data
-
-&#x20;       ↓
-
-Data Preprocessing
-
-&#x20;       ↓
-
-Exploratory Data Analysis
-
-&#x20;       ↓
-
-Random Forest Model
-
-&#x20;       ↓
-
-Failure Probability
-
-&#x20;       ↓
-
-Optimized Decision Threshold
-
-&#x20;       ↓
-
-Machine Failure Risk Alert
-
+Algorithm: Random Forest Classifier
+Number of estimators: 100
+Class weighting: Balanced
+Random state: 42
+Decision threshold: 0.45
 ```
 
+---
 
+## 📊 Input Parameters
 
-\---
+The deployment model uses the following parameters:
 
+| Parameter | Description |
+|---|---|
+| Machine Type | Type of machine: H, L, or M |
+| Air Temperature | Air temperature in Kelvin |
+| Process Temperature | Process temperature in Kelvin |
+| Rotational Speed | Machine rotational speed in rpm |
+| Torque | Machine torque in Nm |
+| Tool Wear | Tool usage time in minutes |
 
+---
 
-\## 🎯 Objectives
+## 📈 Model Performance
 
+The model was evaluated using multiple classification metrics.
 
+| Metric | Score |
+|---|---:|
+| Accuracy | 0.9961 |
+| Precision | 0.9601 |
+| Recall | 0.7837 |
+| F1 Score | 0.8630 |
+| ROC-AUC | 0.9373 |
 
-\* Analyze industrial machine sensor data.
+> These metrics were obtained during model evaluation on the project's test data.
 
-\* Identify patterns associated with machine failures.
+---
 
-\* Build a machine-learning classification model.
+## 🔍 Feature Importance
 
-\* Handle severe class imbalance.
+The Random Forest model provides feature importance values that help identify which machine parameters contribute most strongly to its predictions.
 
-\* Evaluate model performance using appropriate classification metrics.
+The Streamlit application displays these feature importance values as a chart.
 
-\* Develop a sensor-only deployment model for early-warning prediction.
+Important sensor variables include:
 
-\* Optimize the classification threshold based on validation performance.
+- Rotational Speed
+- Torque
+- Tool Wear
+- Air Temperature
+- Process Temperature
 
-\* Build a command-line prediction system for new machine readings.
+---
 
+## 🌐 Streamlit Application
 
+The project includes an interactive Streamlit dashboard where users can enter machine sensor values and receive a predicted failure probability.
 
-\---
+### Application Workflow
 
+```text
+Machine Sensor Inputs
+        ↓
+Data Preprocessing
+        ↓
+Machine Type Encoding
+        ↓
+Random Forest Model
+        ↓
+Failure Probability
+        ↓
+Threshold-Based Decision
+        ↓
+Maintenance Recommendation
+```
 
+---
 
-\## 📊 Dataset
+## 🛠️ Technologies Used
 
+- Python
+- Pandas
+- NumPy
+- Scikit-learn
+- Joblib
+- Streamlit
+- Matplotlib
+- Git & GitHub
 
+---
 
-The project uses the \*\*Kaggle Playground Series S3E17 — Binary Classification of Machine Failures\*\* dataset.
+## 📂 Project Structure
 
+```text
+PredictiveMaintenance/
+│
+├── app.py
+│
+├── data/
+│   ├── train.csv
+│   └── test.csv
+│
+├── models/
+│   ├── machine_failure_model.pkl
+│   └── deployment_model.pkl
+│
+├── outputs/
+│   ├── confusion_matrix.png
+│   └── feature_importance.png
+│
+├── src/
+│   ├── eda.py
+│   ├── load_data.py
+│   ├── model.py
+│   ├── model_deployment.py
+│   ├── predict.py
+│   ├── predict_deployment.py
+│   ├── threshold_analysis.py
+│   └── visualize.py
+│
+├── requirements.txt
+├── README.md
+└── .gitignore
+```
 
+---
 
-\### Dataset statistics
+## ⚙️ Installation
 
+Clone the repository:
 
+```bash
+git clone https://github.com/akshaaksha2931-commits/predictive-maintenance-machine-failure.git
+```
 
-| Property          |   Value |
+Navigate to the project:
 
-| ----------------- | ------: |
+```bash
+cd predictive-maintenance-machine-failure
+```
 
-| Training records  | 136,429 |
+Create a virtual environment:
 
-| Test records      |  90,954 |
+```bash
+python -m venv venv
+```
 
-| Missing values    |       0 |
+Activate the virtual environment on Windows:
 
-| Duplicate records |       0 |
+```bash
+venv\Scripts\activate
+```
 
-| Failure cases     |   2,148 |
+Install dependencies:
 
-| Failure rate      |   1.57% |
+```bash
+pip install -r requirements.txt
+```
 
+---
 
+## ▶️ Run the Streamlit Application
+
+Start the application using:
+
+```bash
+streamlit run app.py
+```
+
+The application will open in your browser.
+
+---
+
+## 🧪 Example Prediction
+
+Example machine input:
+
+```text
+Machine Type: L
+Air Temperature: 300 K
+Process Temperature: 310 K
+Rotational Speed: 1500 rpm
+Torque: 40 Nm
+Tool Wear: 100 min
+```
+
+The application returns:
+
+- Predicted failure probability
+- Machine failure risk status
+- Failure risk visualization
+- Maintenance recommendation
+- Sensor input summary
+- Feature importance visualization
+
+---
+
+## 📌 Dataset
+
+The project uses a machine failure dataset containing machine sensor measurements and failure labels.
 
 The target variable is:
 
-
-
 ```text
-
 Machine failure
-
-0 → No failure
-
-1 → Failure
-
 ```
 
-
-
-Because the failure class represents only approximately \*\*1.57%\*\* of the training data, accuracy alone is not sufficient for evaluating the model.
-
-
-
-\---
-
-
-
-\## 🧰 Technologies
-
-
-
-\* \*\*Python\*\*
-
-\* \*\*Pandas\*\*
-
-\* \*\*NumPy\*\*
-
-\* \*\*Scikit-learn\*\*
-
-\* \*\*Matplotlib\*\*
-
-\* \*\*Seaborn\*\*
-
-\* \*\*Joblib\*\*
-
-\* \*\*Jupyter Notebook\*\*
-
-
-
-\### Machine Learning Algorithm
-
-
-
-\*\*Random Forest Classifier\*\*
-
-
-
-Class imbalance was addressed using:
-
-
-
-```python
-
-class\_weight="balanced"
-
-```
-
-
-
-\---
-
-
-
-\## 🔍 Exploratory Data Analysis
-
-
-
-The project performs analysis of:
-
-
-
-\* Machine failure distribution
-
-\* Failure rate by machine type
-
-\* Tool wear versus failure
-
-\* Sensor correlations
-
-\* Failure-mode indicators
-
-\* Feature importance
-
-
-
-\### Key observations
-
-
-
-Sensor-based features such as \*\*rotational speed, torque, and tool wear\*\* were among the most influential variables in the deployment-oriented model.
-
-
-
-The analysis also showed that machines with higher tool-wear values had higher observed failure rates in the dataset.
-
-
-
-These relationships are treated as \*\*associations rather than causal conclusions\*\*.
-
-
-
-\---
-
-
-
-\## 🤖 Model Development
-
-
-
-Two Random Forest models were developed.
-
-
-
-\### 1. Full-Feature Benchmark Model
-
-
-
-The first model was developed as a benchmark using sensor measurements together with the available failure-mode indicators.
-
-
-
-\#### Performance
-
-
-
-| Metric    |      Score |
-
-| --------- | ---------: |
-
-| Accuracy  | \*\*99.55%\*\* |
-
-| Precision | \*\*90.05%\*\* |
-
-| Recall    | \*\*80.00%\*\* |
-
-| F1 Score  | \*\*84.73%\*\* |
-
-| ROC-AUC   | \*\*94.69%\*\* |
-
-
-
-This model demonstrates the predictive performance when additional failure-related information is available.
-
-
-
-\---
-
-
-
-\### 2. Sensor-Based Deployment Model
-
-
-
-A second model was designed for a more realistic early-warning scenario.
-
-
-
-Only measurements that could reasonably come from machine sensors were used:
-
-
-
-\* Machine Type
-
-\* Air Temperature
-
-\* Process Temperature
-
-\* Rotational Speed
-
-\* Torque
-
-\* Tool Wear
-
-
-
-The failure-mode indicators were excluded.
-
-
-
-\#### Performance
-
-
-
-| Metric    |      Score |
-
-| --------- | ---------: |
-
-| Accuracy  | \*\*98.46%\*\* |
-
-| Precision | \*\*51.23%\*\* |
-
-| Recall    | \*\*43.72%\*\* |
-
-| F1 Score  | \*\*47.18%\*\* |
-
-| ROC-AUC   | \*\*90.69%\*\* |
-
-
-
-The deployment model is the model used by the prediction application.
-
-
-
-\---
-
-
-
-\## ⚖️ Handling Class Imbalance
-
-
-
-Only \*\*1.57%\*\* of the training observations represent machine failures.
-
-
-
-Therefore, a model can achieve high accuracy while still missing a significant number of actual failures.
-
-
-
-For this reason, the project focuses on:
-
-
-
-\* Precision
-
-\* Recall
-
-\* F1 Score
-
-\* ROC-AUC
-
-
-
-rather than using accuracy as the primary performance measure.
-
-
-
-\---
-
-
-
-\## 🎚️ Probability Threshold Optimization
-
-
-
-Random Forest normally classifies an observation as positive when its predicted probability reaches the default decision threshold of \*\*0.50\*\*.
-
-
-
-For predictive maintenance, the threshold affects the trade-off between:
-
-
-
-\* \*\*Precision\*\* — avoiding unnecessary maintenance alerts
-
-\* \*\*Recall\*\* — detecting more actual failures
-
-
-
-Several thresholds were evaluated on the validation set.
-
-
-
-| Threshold | Precision |    Recall |  F1 Score |
-
-| --------: | --------: | --------: | --------: |
-
-|      0.20 |     0.288 |     0.647 |     0.399 |
-
-|      0.25 |     0.331 |     0.621 |     0.432 |
-
-|      0.30 |     0.369 |     0.591 |     0.454 |
-
-|      0.35 |     0.404 |     0.544 |     0.464 |
-
-|      0.40 |     0.445 |     0.526 |     0.482 |
-
-|  \*\*0.45\*\* | \*\*0.481\*\* | \*\*0.491\*\* | \*\*0.486\*\* |
-
-|      0.50 |     0.508 |     0.444 |     0.474 |
-
-
-
-The \*\*0.45 threshold produced the highest F1 score among the tested thresholds\*\*, so it was selected as the operating threshold for this prototype.
-
-
+Where:
 
 ```text
-
-Predicted probability ≥ 0.45
-
-&#x20;       ↓
-
-Machine failure risk detected
-
-
-
-Predicted probability < 0.45
-
-&#x20;       ↓
-
-No machine failure risk detected
-
+0 = No machine failure
+1 = Machine failure
 ```
 
+The dataset contains a highly imbalanced target, making metrics such as precision, recall, F1-score and ROC-AUC important when evaluating the model.
 
+---
 
-\---
+## 🔮 Future Improvements
 
+Possible future improvements include:
 
+- Real-time sensor data integration
+- IoT-based machine monitoring
+- Automated maintenance alerts
+- Cloud deployment
+- Historical prediction tracking
+- Advanced anomaly detection
+- Model retraining with new sensor data
+- Integration with industrial monitoring systems
 
-\## 🖥️ Prediction System
+---
 
+## 👩‍💻 Author
 
+**Aksha K**
 
-The project includes a command-line prediction application.
+Computer Science Engineering Student
 
+---
 
+## ⭐ Project Highlights
 
-Run:
+This project demonstrates practical knowledge of:
 
-
-
-```bash
-
-python src/predict\_deployment.py
-
-```
-
-
-
-The application accepts:
-
-
-
-```text
-
-Machine Type
-
-Air Temperature \[K]
-
-Process Temperature \[K]
-
-Rotational Speed \[rpm]
-
-Torque \[Nm]
-
-Tool Wear \[min]
-
-```
-
-
-
-It returns:
-
-
-
-```text
-
-Predicted failure probability
-
-Failure risk classification
-
-```
-
-
-
-\### Example
-
-
-
-```text
-
-===== RESULT =====
-
-⚠️ MACHINE FAILURE RISK DETECTED
-
-Predicted failure probability: 46.92%
-
-```
-
-
-
-The \*\*46.92% value is the model's predicted probability for the failure class\*\*. It should not be interpreted as a guaranteed real-world probability that the machine will fail.
-
-
-
-\---
-
-
-
-\## 📈 Project Outputs
-
-
-
-The repository contains visualizations generated during analysis and model development:
-
-
-
-\* Failure distribution
-
-\* Failure rate by machine type
-
-\* Tool wear versus failure
-
-\* Correlation heatmap
-
-\* Confusion matrix
-
-\* Feature importance
-
-
-
-These are available in the \[`outputs/`](outputs/) directory.
-
-
-
-\---
-
-
-
-\## 📁 Project Structure
-
-
-
-```text
-
-predictive-maintenance-ml/
-
-│
-
-├── data/
-
-│   └── Dataset files excluded from Git
-
-│
-
-├── models/
-
-│   ├── deployment\_model.pkl
-
-│   └── machine\_failure\_model.pkl
-
-│
-
-├── outputs/
-
-│   ├── confusion\_matrix.png
-
-│   ├── correlation\_heatmap.png
-
-│   ├── failure\_by\_type.png
-
-│   ├── failure\_distribution.png
-
-│   ├── feature\_importance.png
-
-│   └── tool\_wear\_vs\_failure.png
-
-│
-
-├── src/
-
-│   ├── eda.py
-
-│   ├── load\_data.py
-
-│   ├── model.py
-
-│   ├── model\_deployment.py
-
-│   ├── predict.py
-
-│   ├── predict\_deployment.py
-
-│   ├── threshold\_analysis.py
-
-│   └── visualize.py
-
-│
-
-├── .gitignore
-
-├── README.md
-
-├── requirements.txt
-
-└── venv/                 # Local environment, excluded from Git
-
-```
-
-
-
-\---
-
-
-
-\## ▶️ Installation \& Usage
-
-
-
-\### 1. Clone the repository
-
-
-
-```bash
-
-git clone https://github.com/akshaaksha2931-commits/predictive-maintenance-ml.git
-
-cd predictive-maintenance-ml
-
-```
-
-
-
-\### 2. Create a virtual environment
-
-
-
-```bash
-
-python -m venv venv
-
-```
-
-
-
-\### 3. Activate the environment
-
-
-
-\#### Windows PowerShell
-
-
-
-```powershell
-
-.\\venv\\Scripts\\Activate.ps1
-
-```
-
-
-
-\### 4. Install dependencies
-
-
-
-```bash
-
-pip install -r requirements.txt
-
-```
-
-
-
-\### 5. Run the prediction system
-
-
-
-```bash
-
-python src/predict\_deployment.py
-
-```
-
-
-
-\---
-
-
-
-\## 🧪 Model Development Scripts
-
-
-
-The main scripts are:
-
-
-
-| Script                  | Purpose                                 |
-
-| ----------------------- | --------------------------------------- |
-
-| `load\_data.py`          | Load and inspect dataset                |
-
-| `eda.py`                | Perform exploratory data analysis       |
-
-| `visualize.py`          | Generate visualizations                 |
-
-| `model.py`              | Train the full-feature benchmark model  |
-
-| `model\_deployment.py`   | Train the sensor-based deployment model |
-
-| `predict.py`            | Run full-feature predictions            |
-
-| `predict\_deployment.py` | Run sensor-based predictions            |
-
-| `threshold\_analysis.py` | Evaluate classification thresholds      |
-
-
-
-\---
-
-
-
-\## ⚠️ Limitations
-
-
-
-This project is a machine-learning prototype and is not intended for direct industrial deployment.
-
-
-
-Important limitations include:
-
-
-
-1\. The dataset is highly imbalanced.
-
-2\. The models use a random train-validation split rather than time-based validation.
-
-3\. The benchmark model includes failure-mode indicators that may not be available sufficiently early in a real-world maintenance workflow.
-
-4\. The deployment model uses sensor measurements but has lower recall than the full-feature benchmark model.
-
-5\. Real industrial deployment would require validation using real machine data and operational time-series information.
-
-6\. The selected probability threshold should ultimately be determined according to the operational cost of missed failures versus false alarms.
-
-
-
-\---
-
-
-
-\## 🔮 Future Improvements
-
-
-
-Potential improvements include:
-
-
-
-\* \[ ] Build a Streamlit monitoring dashboard
-
-\* \[ ] Add real-time sensor input
-
-\* \[ ] Add maintenance alert notifications
-
-\* \[ ] Integrate IoT sensor data
-
-\* \[ ] Perform time-based model validation
-
-\* \[ ] Explore time-series machine learning
-
-\* \[ ] Calibrate predicted probabilities
-
-\* \[ ] Deploy the model using FastAPI or Flask
-
-\* \[ ] Add model monitoring and drift detection
-
-\* \[ ] Validate against real industrial machine data
-
-
-
-\---
-
-
-
-\## 👩‍💻 Author
-
-
-
-\*\*Aksha K.\*\*
-
-
-
-B.E. Computer Science and Engineering
-
-
-
-\---
-
-
-
-\## 📌 Disclaimer
-
-
-
-This project is intended for educational and portfolio purposes. Model predictions are statistical estimates generated from the training data and should not be treated as definitive predictions of real-world machine failure.
-
-
-
+- Machine Learning
+- Classification
+- Random Forest
+- Imbalanced Dataset Handling
+- Feature Engineering
+- Model Evaluation
+- Probability Threshold Optimization
+- Data Visualization
+- Streamlit Deployment
+- Git & GitHub
